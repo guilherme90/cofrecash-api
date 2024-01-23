@@ -9,3 +9,82 @@ datasource db {
   provider = "mysql"
   url      = env("DATABASE_URL")
 }
+
+model User {
+  id         Int      @id @default(autoincrement())
+  name       String   @db.VarChar(100)
+  email      String   @db.VarChar(200)
+  password   String
+  created_at DateTime @default(now())
+
+  categoryNested CategoryNested?
+  bankAccount    BankAccountUser?
+
+  @@map("user")
+}
+
+model TypeOfTransaction {
+  id   Int    @id @default(autoincrement())
+  name String @db.VarChar(10)
+  slug String
+
+  category Category[]
+
+  @@map("type_of_transaction")
+}
+
+model Category {
+  id Int @id @default(autoincrement())
+
+  type_of_transaction_id Int
+  name                   String   @db.VarChar(100)
+  slug                   String
+  created_at             DateTime @default(now())
+
+  categoryNested    CategoryNested[]
+  typeOfTransaction TypeOfTransaction @relation(fields: [type_of_transaction_id], references: [id])
+
+  @@map("category")
+}
+
+model CategoryNested {
+  id          Int      @id @default(autoincrement())
+  user_id     Int      @unique
+  category_id Int
+  name        String   @db.VarChar(100)
+  slug        String
+  created_at  DateTime @default(now())
+
+  category Category @relation(fields: [category_id], references: [id])
+  user     User     @relation(fields: [user_id], references: [id])
+
+  @@map("category_nested")
+}
+
+enum BankAccountEnum {
+  WALLET
+  SAVINGS
+  CHECKING
+}
+
+model BankAccount {
+  id   Int             @id @default(autoincrement())
+  name String
+  type BankAccountEnum
+
+  BankAccountUser BankAccountUser[]
+
+  @@map("bank_account")
+}
+
+model BankAccountUser {
+  id              Int @id @default(autoincrement())
+  user_id         Int @unique
+  bank_account_id Int @unique
+
+  user        User        @relation(fields: [user_id], references: [id])
+  bankAccount BankAccount @relation(fields: [bank_account_id], references: [id])
+
+  @@unique([user_id, bank_account_id])
+  @@map("bank_account_user")
+}
