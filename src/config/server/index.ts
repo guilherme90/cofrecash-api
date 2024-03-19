@@ -1,21 +1,35 @@
 import express, { Express } from 'express'
-import { attachControllers } from '@decorators/express'
 
 import setupRoutes from './routes'
 import setupSwagger from './swagger'
 import setupMiddlewares from './middlewares'
+import env from '@/config/env'
+
+function defaultRoutes(app: Express) {
+  app.get('/healthcheck', async (_req, response) => {
+    return response.status(200).json({
+      version: env.appVersion
+    })
+  })
+
+  app.get('/', async (_req, respose) => {
+    return respose.status(200).json({
+      version: env.appVersion
+    })
+  })
+}
 
 export const setupServer = async (): Promise<Express> => {
   const app = express()
 
   setupSwagger(app)
   setupMiddlewares(app)
-  setupRoutes(app)
+  defaultRoutes(app)
 
-  const apiRouter = express.Router()
+  const router = express.Router()
+  setupRoutes(router)
 
-  await attachControllers(apiRouter, [])
-  app.use('/api', apiRouter)
+  app.use('/api', router)
 
   return app
 }

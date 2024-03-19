@@ -6,12 +6,12 @@ export function validator(
   data: object,
   response: Response,
   next: NextFunction
-): Response {
+): Response | void {
   const payload: any = zod.safeParse(data)
 
   if (!payload.success) {
     return response.status(422).json({
-      message: 'Os dados informados são inválidos',
+      message: 'Dados inválidos',
       errors: payload.error.issues.map((item) => ({
         field: item.path.join('.'),
         message: item.message

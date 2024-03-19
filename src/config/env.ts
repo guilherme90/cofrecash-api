@@ -5,5 +5,9 @@ export default {
   envName: env.NODE_ENV,
   appName: env.APP_NAME,
   appVersion: env.APP_VERSION ?? 'local',
-  appPort: parseInt(env.APP_PORT ?? '80')
+  appPort: parseInt(env.APP_PORT ?? '80'),
+  jwt: {
+    expiresIn: env.JWT_EXPIRATION ?? null,
+    secret: env.JWT_SECRET
+  }
 }

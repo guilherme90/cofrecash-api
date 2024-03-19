@@ -11,7 +11,7 @@ export abstract class AbstractController {
 
   protected async failureResponse(response: Response, error: Error | any): Promise<Response> {
     const { message, statusCode, errors } = error
-    return response.status(statusCode).send({
+    return response.status(statusCode || 500).send({
       message,
       errors
     })

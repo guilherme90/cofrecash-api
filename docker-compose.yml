@@ -1,10 +1,24 @@
 version: '3.8'
 
 services:
+  db:
+    container_name: cofrecash-db
+    image: mysql
+    restart: always
+    env_file: .env
+    command: --default-authentication-plugin=mysql_native_password
+    ports:
+      - "3310:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: 1234
+      MYSQL_DATABASE: cofre_cash
+    volumes:
+      - db:/var/lib/mysql
+
   api:
     container_name: cofrecash-api
     image: node:20-alpine
-    restart: unless-stopped
+    restart: always
     env_file: .env
     ports:
       - "3000:3000"
@@ -13,22 +27,11 @@ services:
       dockerfile: Dockerfile
     stdin_open: true
     tty: true
+    depends_on:
+      db:
+        condition: service_completed_successfully
     volumes:
       - "./:/app"
-
-  db:
-    container_name: cofrecash-db
-    image: mysql
-    restart: always
-    env_file: .env
-    command: --default-authentication-plugin=mysql_native_password
-    ports:
-      - "3306:3305"
-    environment:
-      MYSQL_ROOT_PASSWORD: 1234
-      MYSQL_DATABASE: cofrecash
-    volumes:
-      - db:/var/lib/mysql
 
 volumes:
   db:

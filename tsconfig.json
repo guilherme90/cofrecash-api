@@ -1,23 +1,30 @@
 {
   "compilerOptions": {
-	"module": "commonjs",
-	"moduleResolution": "node",
-	"esModuleInterop": true,
-	"emitDecoratorMetadata": true,
-	"experimentalDecorators": true,
-	"allowSyntheticDefaultImports": true,
-	"target": "es2020",
-	"sourceMap": true,
-	"outDir": "./dist",
-	"baseUrl": "./",
-	"resolveJsonModule": true,
-	"types": ["node", "jest"],
-	"paths": {
-	  "@/*": ["src/*"]
-	}
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "allowSyntheticDefaultImports": true,
+    "target": "es2020",
+    "sourceMap": true,
+    "outDir": "./dist",
+    "baseUrl": "./",
+    "resolveJsonModule": true,
+    "types": [
+      "node",
+      "jest"
+    ],
+    "paths": {
+      "@/*": [
+        "src/*"
+      ]
+    }
   },
   "include": [
-	"./src/**/*.ts"
+    "./src/**/*.ts"
   ],
-  "exclude": ["./dist/*"]
+  "exclude": [
+    "./dist/*"
+  ]
 }
