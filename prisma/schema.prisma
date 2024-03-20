@@ -55,7 +55,7 @@ model CategoryNested {
   category_id Int       @unique
   name        String    @db.VarChar(100)
   slug        String
-  created_at  DateTime  @default(now()) @db.Timestamp
+  created_at  DateTime  @default(now())
   updated_at  DateTime? @db.Timestamp
   deleted_at  DateTime? @db.Timestamp
 
@@ -87,7 +87,7 @@ model BankAccountUser {
   user_id         Int @unique
   bank_account_id Int @unique
 
-  created_at DateTime  @default(now()) @db.Timestamp
+  created_at DateTime  @default(now())
   updated_at DateTime? @db.Timestamp
   deleted_at DateTime? @db.Timestamp
 
@@ -105,12 +105,12 @@ model Transaction {
   type_transaction_id Int
   category_id         Int
   title               String   @db.VarChar(254)
-  description         String   @db.Text
+  description         String?  @db.Text
   value_transaction   Decimal  @db.Decimal(11, 2)
   due_date            DateTime @db.Date
   finished            Boolean  @default(false)
 
-  created_at DateTime  @default(now()) @db.Timestamp
+  created_at DateTime  @default(now())
   updated_at DateTime? @db.Timestamp
   deleted_at DateTime? @db.Timestamp
 
@@ -131,7 +131,7 @@ model TransactionHistorical {
   previous_balance Decimal @db.Decimal(11, 2)
   current_balance  Decimal @db.Decimal(11, 2)
 
-  created_at DateTime @default(now()) @db.Timestamp
+  created_at DateTime @default(now())
 
   transaction Transaction @relation(fields: [transaction_id], references: [id])
 
@@ -157,7 +157,7 @@ model TransactionSetting {
   installments_quantuty Int?                                @db.MediumInt
   installments_interval TransactionSettingInstallmentsEnum?
 
-  created_at DateTime  @default(now()) @db.Timestamp
+  created_at DateTime  @default(now())
   updated_at DateTime? @db.Timestamp
   deleted_at DateTime? @db.Timestamp
 
