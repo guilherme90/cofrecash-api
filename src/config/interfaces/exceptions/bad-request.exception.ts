@@ -1,6 +1,5 @@
-type IErrors = {
-  message?: string
-}
+import { HttpStatus } from '@/config/interfaces/http-status'
+import { IErrors } from '@/config/interfaces/exceptions'
 
 export class BadRequestException extends Error {
   statusCode: number
@@ -10,6 +9,6 @@ export class BadRequestException extends Error {
     super(message)
     this.message = message
     this.errors = errors
-    this.statusCode = 400
+    this.statusCode = HttpStatus.BAD_REQUEST
   }
 }

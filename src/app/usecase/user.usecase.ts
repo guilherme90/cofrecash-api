@@ -1,11 +1,10 @@
 import { User } from '@prisma/client'
 
-import { BadRequestException } from '@/config/interfaces/exceptions'
+import { BadRequestException, UnauthorizedException } from '@/config/interfaces/exceptions'
 
 import { UserSignupInput, UserSignInInput, UserSignInOutput } from '@/app/dto/user.dto'
 import { UserRepository } from '@/app/repository/user.repository'
 import { comparePassword, encryptPassword } from '@/utils/password'
-import { UnauthorizedException } from '@/config/interfaces/exceptions/unauthorized.exception'
 import { generateToken } from '@/utils/token'
 
 export class UserUsecase {

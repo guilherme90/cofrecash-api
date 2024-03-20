@@ -1,17 +1,18 @@
 import { Response } from 'express'
+import { HttpStatus } from '@/config/interfaces/http-status'
 
 export abstract class AbstractController {
-  protected async successResponse(
+  protected successResponse(
     response: Response,
     body: any,
-    statusCode = 200
-  ): Promise<Response> {
+    statusCode = HttpStatus.OK
+  ): Response {
     return response.status(statusCode).send(body)
   }
 
-  protected async failureResponse(response: Response, error: Error | any): Promise<Response> {
+  protected failureResponse(response: Response, error: Error | any): Response {
     const { message, statusCode, errors } = error
-    return response.status(statusCode || 500).send({
+    return response.status(statusCode || HttpStatus.INTERNAL_SERVER_ERROR).send({
       message,
       errors
     })
