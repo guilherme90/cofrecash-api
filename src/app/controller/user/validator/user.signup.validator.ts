@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from 'express'
-import { validator } from '@/config/interfaces/middlewares/validators.middleware'
+import { validator } from '@/config/interfaces/middlewares'
 
 import { z } from 'zod'
 
