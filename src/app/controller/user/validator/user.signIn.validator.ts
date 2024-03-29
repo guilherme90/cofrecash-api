@@ -1,7 +1,8 @@
+import { z } from 'zod'
 import { Request, Response, NextFunction } from 'express'
+
 import { validator } from '@/config/interfaces/middlewares'
 
-import { z } from 'zod'
 
 export function userSignInValidator(request: Request, response: Response, next: NextFunction) {
   const constraints = z.object({

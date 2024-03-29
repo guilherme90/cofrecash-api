@@ -1,7 +1,8 @@
-import { Request, Response, NextFunction } from 'express'
-import { validator } from '@/config/interfaces/middlewares'
-
 import { z } from 'zod'
+import { Request, Response, NextFunction } from 'express'
+
+import { validator } from '@/config/interfaces/middlewares'
+import { TransactionSettingInstallmentsEnum } from '@/app/dto'
 
 export function transactionCreateValidator (request: Request, response: Response, next: NextFunction) {
   const constraints = z.object({
@@ -34,7 +35,13 @@ export function transactionCreateValidator (request: Request, response: Response
     due_date: z.date({
       required_error: 'A data é obrigatória',
       invalid_type_error: 'Data inválida'
-    })
+    }),
+    setting: z.object({
+      fixed: z.boolean().optional(),
+      installments: z.boolean().optional(),
+      installments_quantity: z.number().min(1).optional(),
+      installments_interval: z.nativeEnum(TransactionSettingInstallmentsEnum).optional()
+    }).optional()
   })
 
   return validator(constraints, request.body, response, next)

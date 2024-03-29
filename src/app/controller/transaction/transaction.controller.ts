@@ -1,15 +1,17 @@
 import { AbstractController } from '@/config/interfaces/abstract-controller'
 import { Request, Response } from 'express'
 import { HttpStatus } from '@/config/interfaces/http-status'
+import { TransactionUseCase } from '@/app/usecase'
 
 export class TransactionController extends AbstractController {
-  constructor () {
+  constructor (private readonly transactionUseCase: TransactionUseCase) {
     super()
   }
 
   public create = async (request: Request, response: Response) => {
     try {
-      return this.successResponse(response, {}, HttpStatus.CREATED)
+      const data = await this.transactionUseCase.create(request.body)
+      return this.successResponse(response, data, HttpStatus.CREATED)
     } catch (e) {
       return this.failureResponse(response, e)
     }

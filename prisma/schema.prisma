@@ -154,7 +154,7 @@ model TransactionSetting {
   transaction_id        Int
   fixed                 Boolean?
   installments          Boolean?
-  installments_quantuty Int?                                @db.MediumInt
+  installments_quantity Int?                                @db.MediumInt
   installments_interval TransactionSettingInstallmentsEnum?
 
   created_at DateTime  @default(now())
