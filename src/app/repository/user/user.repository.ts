@@ -1,6 +1,6 @@
 import { prisma } from '@/db'
 
-import { UserSignupInput } from '@/app/dto/user.dto'
+import { UserSignupInput } from '@/app/dto/user/user.dto'
 import { User, Prisma } from '@prisma/client'
 
 export class UserRepository {

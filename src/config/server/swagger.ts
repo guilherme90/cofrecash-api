@@ -9,7 +9,7 @@ export default (app: Express): void => {
     '/docs',
     swaggerUi.serve,
     swaggerUi.setup(swaggerDocument, {
-      customSiteTitle: 'WEDIGITEK DOC API'
+      customSiteTitle: 'CofreCash DOC API'
     })
   )
 }

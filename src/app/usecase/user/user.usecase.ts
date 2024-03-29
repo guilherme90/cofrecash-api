@@ -2,8 +2,8 @@ import { User } from '@prisma/client'
 
 import { BadRequestException, UnauthorizedException } from '@/config/interfaces/exceptions'
 
-import { UserSignupInput, UserSignInInput, UserSignInOutput } from '@/app/dto/user.dto'
-import { UserRepository } from '@/app/repository/user.repository'
+import { UserSignupInput, UserSignInInput, UserSignInOutput } from '@/app/dto/user/user.dto'
+import { UserRepository } from '@/app/repository/user/user.repository'
 import { comparePassword, encryptPassword } from '@/utils/password'
 import { generateToken } from '@/utils/token'
 

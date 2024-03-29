@@ -1,5 +1,5 @@
 import { AbstractController } from '@/config/interfaces/abstract-controller'
-import { UserUsecase } from '@/app/usecase/user.usecase'
+import { UserUsecase } from '@/app/usecase/user/user.usecase'
 import { Request, Response } from 'express'
 import { HttpStatus } from '@/config/interfaces/http-status'
 

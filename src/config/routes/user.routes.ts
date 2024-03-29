@@ -1,6 +1,6 @@
 import { IRouter } from 'express'
-import { UserFactory } from '@/app/factory/user.factory'
-import { userSignupValidator, userSignInValidator } from '@/app/controller/validator/user'
+import { UserFactory } from '@/app/factory'
+import { userSignupValidator, userSignInValidator } from '@/app/controller'
 
 const controller = new UserFactory().controllerFactory()
 
